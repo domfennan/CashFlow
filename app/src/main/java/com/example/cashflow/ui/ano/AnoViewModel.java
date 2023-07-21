@@ -1,16 +1,16 @@
-package com.example.cashflow.ui.gallery;
+package com.example.cashflow.ui.ano;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class AnoViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public AnoViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        mText.setValue("This is ano fragment");
     }
 
     public LiveData<String> getText() {

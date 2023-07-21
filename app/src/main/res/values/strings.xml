@@ -2,12 +2,24 @@
     <string name="app_name">CashFlow</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Sua Conta</string>
+    <!--<string name="nav_header_subtitle">android.studio@android.com</string>-->
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <!--<string name="menu_home">Home</string>
+   <string name="menu_gallery">Gallery</string>
+   <string name="menu_slideshow">Slideshow</string>-->
+    <string name="menu_dia">Dia</string>
+    <string name="menu_semana">Semana</string>
+    <string name="menu_mes">Mês</string>
+    <string name="menu_ano">Ano</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="entrar">Entrar</string>
+    <string name="text_cadastro">Crie uma conta clicando aqui</string>
+    <string name="title_cadastro">Cadastre-se</string>
+
 </resources>

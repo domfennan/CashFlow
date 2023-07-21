@@ -1,4 +1,4 @@
-package com.example.cashflow.ui.gallery;
+package com.example.cashflow.ui.dia;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.cashflow.databinding.FragmentGalleryBinding;
+import com.example.cashflow.databinding.FragmentDiaBinding;
 
-public class GalleryFragment extends Fragment {
+public class DiaFragment extends Fragment {
 
-    private FragmentGalleryBinding binding;
+    private FragmentDiaBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        GalleryViewModel galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
+        DiaViewModel diaViewModel =
+                new ViewModelProvider(this).get(DiaViewModel.class);
 
-        binding = FragmentGalleryBinding.inflate(inflater, container, false);
+        binding = FragmentDiaBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textGallery;
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textDia;
+        diaViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

@@ -3,23 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_dia">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.cashflow.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/nav_dia"
+        android:name="com.example.cashflow.ui.dia.DiaFragment"
+        android:label="@string/menu_dia"
+        tools:layout="@layout/fragment_dia" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.cashflow.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_semana"
+        android:name="com.example.cashflow.ui.semana.SemanaFragment"
+        android:label="@string/menu_semana"
+        tools:layout="@layout/fragment_semana" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.cashflow.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_mes"
+        android:name="com.example.cashflow.ui.mes.MesFragment"
+        android:label="@string/menu_mes"
+        tools:layout="@layout/fragment_mes" />
+    <fragment
+        android:id="@+id/nav_ano"
+        android:name="com.example.cashflow.ui.ano.AnoFragment"
+        android:label="@string/menu_ano"
+        tools:layout="@layout/fragment_ano" />
+
+
 </navigation>
