@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class FormLogin extends AppCompatActivity {
 
     private TextView text_tela_cadastro;
+    private Button bt_entrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +19,7 @@ public class FormLogin extends AppCompatActivity {
         setContentView(R.layout.activity_form_login);
 
         IniciarComponentes();
+
         text_tela_cadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -25,9 +28,21 @@ public class FormLogin extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        bt_entrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(FormLogin.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
-    //hide da action bar da bug no app no caso form login pois ela é o launcher
+
     private void IniciarComponentes(){
         text_tela_cadastro = findViewById(R.id.text_tela_cadastro);
+        bt_entrar = findViewById(R.id.bt_entrar);
+
     }
 }

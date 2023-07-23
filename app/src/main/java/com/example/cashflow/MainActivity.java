@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+    private TextView text_tela_conta;
+    private ImageView imageUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
+
+        IniciarComponentes();
+
+
+
         binding.appBarMain.btAdicionaDespesa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);// Iniciar a nova atividade
             }
         });
+
+
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
@@ -52,7 +64,22 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        text_tela_conta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                Intent intent = new Intent(MainActivity.this,TelaConta.class);
+                startActivity(intent);
+            }
+        });
+        imageUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this,TelaConta.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -70,4 +97,10 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    private void IniciarComponentes(){
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        text_tela_conta = navigationView.getHeaderView(0).findViewById(R.id.text_tela_conta);
+
+        imageUser = navigationView.getHeaderView(0).findViewById(R.id.imageUser);
+    }
 }
