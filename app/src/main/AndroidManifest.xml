@@ -13,6 +13,9 @@
         android:theme="@style/Theme.CashFlow"
         tools:targetApi="31">
         <activity
+            android:name=".EditarDespesa"
+            android:exported="false" />
+        <activity
             android:name=".DetalheDespesa"
             android:exported="false" />
         <activity
@@ -27,7 +30,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.CashFlow.NoActionBar"/>
+            android:theme="@style/Theme.CashFlow.NoActionBar" />
         <activity
             android:name=".FormLogin"
             android:exported="true"

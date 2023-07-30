@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetalheDespesa">
+    tools:context=".EditarDespesa">
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -21,19 +21,19 @@
 
             <ImageView
                 android:id="@+id/bt_voltar"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_voltar"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_cancelar"
                 app:layout_constraintTop_toTopOf="@id/toolbar"
                 app:layout_constraintStart_toStartOf="@id/toolbar"
                 app:layout_constraintBottom_toBottomOf="@id/toolbar"
-                android:layout_marginLeft="6dp"
+                android:layout_marginLeft="12dp"
                 app:tint="@color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Detalhes"
+                android:text="Editar"
                 android:textColor="@color/white"
                 app:layout_constraintTop_toTopOf="@id/toolbar"
                 app:layout_constraintStart_toStartOf="@id/toolbar"
@@ -47,24 +47,13 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <!-- Botão de deletar -->
             <ImageView
-                android:id="@+id/bt_editar"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_editar"
+                android:id="@+id/bt_salvar"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_salvar"
                 android:layout_gravity="end"
                 android:layout_marginEnd="10dp"
-                app:tint="@color/white" />
-
-            <!-- Botão de editar -->
-            <ImageView
-                android:id="@+id/bt_delete"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_delete"
-                android:layout_gravity="end"
-                android:layout_marginEnd="18dp"
                 app:tint="@color/white" />
 
         </androidx.appcompat.widget.Toolbar>
@@ -73,7 +62,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutValorDetalhe"
+        android:id="@+id/textInputLayoutValor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="valor"
@@ -92,12 +81,12 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutDescricaoDetalhe"
+        android:id="@+id/textInputLayoutDescricao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Descrição"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutValorDetalhe"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutValor"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         >
@@ -110,17 +99,17 @@
 
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutDataDetalhe"
+        android:id="@+id/textInputLayoutData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Data"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDescricaoDetalhe"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDescricao"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextDataDetalhe"
+            android:id="@+id/editTextData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="false"
@@ -130,14 +119,14 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/textCategoiraDetalhe"
+        android:id="@+id/textCategoira"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Categoria"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDataDetalhe"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutData"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="10dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -145,23 +134,23 @@
         />
 
     <Spinner
-        android:id="@+id/spinnerCategoriaDetalhe"
+        android:id="@+id/spinnerCategoria"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/textCategoiraDetalhe"
+        app:layout_constraintTop_toBottomOf="@+id/textCategoira"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="10dp"
         android:padding="12dp"/>
 
     <TextView
-        android:id="@+id/textLugarDetalhe"
+        android:id="@+id/textLugar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Lugar"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerCategoriaDetalhe"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCategoria"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="10dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -169,14 +158,14 @@
         />
 
     <TextView
-        android:id="@+id/textAdicionarLocalDetalhe"
+        android:id="@+id/textAdicionarLocal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="ADICIONAR LOCAL"
         android:textColor="@color/blue"
         android:textSize="16sp"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/textLugarDetalhe"
+        app:layout_constraintTop_toBottomOf="@+id/textLugar"
         android:layout_marginLeft="25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
