@@ -1,4 +1,4 @@
-package com.example.cashflow.ui.semana;
+package com.example.cashflow.ui.relatorio;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.cashflow.databinding.FragmentSemanaBinding;
+import com.example.cashflow.databinding.FragmentRelatorioBinding;
 
-public class SemanaFragment extends Fragment {
+public class RelatorioFragment extends Fragment {
 
-    private FragmentSemanaBinding binding;
+    private FragmentRelatorioBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SemanaViewModel semanaViewModel =
-                new ViewModelProvider(this).get(SemanaViewModel.class);
+        RelatorioViewModel relatorioViewModel =
+                new ViewModelProvider(this).get(RelatorioViewModel.class);
 
-        binding = FragmentSemanaBinding.inflate(inflater, container, false);
+        binding = FragmentRelatorioBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textSemana;
-        semanaViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        relatorioViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

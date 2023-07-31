@@ -10,8 +10,8 @@
     <!--<string name="menu_home">Home</string>
    <string name="menu_gallery">Gallery</string>
    <string name="menu_slideshow">Slideshow</string>-->
-    <string name="menu_dia">Dia</string>
-    <string name="menu_semana">Semana</string>
+    <string name="menu_registros">Registros</string>
+    <string name="menu_relatorio">Relatorio</string>
     <string name="menu_mes">Mês</string>
     <string name="menu_ano">Ano</string>
     <!-- TODO: Remove or change this placeholder text -->

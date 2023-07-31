@@ -5,20 +5,21 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_dia"
-            android:icon="@drawable/ic_hoje"
-            android:title="@string/menu_dia" />
+            android:id="@+id/nav_registros"
+            android:icon="@drawable/ic_registros"
+            android:title="@string/menu_registros" />
         <item
-            android:id="@+id/nav_semana"
-            android:icon="@drawable/ic_semana"
-            android:title="@string/menu_semana" />
-        <item
-            android:id="@+id/nav_mes"
-            android:icon="@drawable/ic_mes"
-            android:title="@string/menu_mes" />
-        <item
-            android:id="@+id/nav_ano"
-            android:icon="@drawable/ic_ano"
-            android:title="@string/menu_ano" />
-    </group>
-</menu>
+            android:id="@+id/nav_relatoiro"
+            android:icon="@drawable/ic_relatorio"
+            android:title="@string/menu_relatorio" />
+        <!-- <item
+             android:id="@+id/nav_mes"
+             android:icon="@drawable/ic_mes"
+             android:title="@string/menu_mes" />
+         <item
+             android:id="@+id/nav_ano"
+             android:icon="@drawable/ic_ano"
+             android:title="@string/menu_ano" />
+             -->
+     </group>
+ </menu>

@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_dia">
+    app:startDestination="@+id/nav_registros">
 
     <fragment
-        android:id="@+id/nav_dia"
-        android:name="com.example.cashflow.ui.dia.DiaFragment"
-        android:label="@string/menu_dia"
-        tools:layout="@layout/fragment_dia" />
+        android:id="@+id/nav_registros"
+        android:name="com.example.cashflow.ui.registros.RegistrosFragment"
+        android:label="@string/menu_registros"
+        tools:layout="@layout/fragment_registros" />
 
     <fragment
-        android:id="@+id/nav_semana"
-        android:name="com.example.cashflow.ui.semana.SemanaFragment"
-        android:label="@string/menu_semana"
-        tools:layout="@layout/fragment_semana" />
+        android:id="@+id/nav_relatoiro"
+        android:name="com.example.cashflow.ui.relatorio.RelatorioFragment"
+        android:label="@string/menu_relatorio"
+        tools:layout="@layout/fragment_relatorio" />
 
     <fragment
         android:id="@+id/nav_mes"

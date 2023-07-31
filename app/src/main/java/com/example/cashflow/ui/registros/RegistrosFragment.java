@@ -1,4 +1,4 @@
-package com.example.cashflow.ui.dia;
+package com.example.cashflow.ui.registros;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,21 +13,21 @@ import com.example.cashflow.DataSource;
 import com.example.cashflow.DespesaAdapter;
 import com.example.cashflow.DetalheDespesa;
 import com.example.cashflow.DespesaItemClickListener;
-import com.example.cashflow.databinding.FragmentDiaBinding;
+import com.example.cashflow.databinding.FragmentRegistrosBinding;
 import com.example.cashflow.models.Despesa;
 import java.util.ArrayList;
 
-public class DiaFragment extends Fragment implements DespesaItemClickListener {
+public class RegistrosFragment extends Fragment implements DespesaItemClickListener {
 
-    private FragmentDiaBinding binding;
+    private FragmentRegistrosBinding binding;
     private DespesaAdapter despesaAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DiaViewModel diaViewModel =
-                new ViewModelProvider(this).get(DiaViewModel.class);
+        RegistrosViewModel registrosViewModel =
+                new ViewModelProvider(this).get(RegistrosViewModel.class);
 
-        binding = FragmentDiaBinding.inflate(inflater, container, false);
+        binding = FragmentRegistrosBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         initRecyclerView();
