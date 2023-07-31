@@ -1,0 +1,9 @@
+<resources>
+    <!-- Opções do Spinner de Timeframe -->
+    <string-array name="timeframe_options">
+        <item>Dia</item>
+        <item>Semana</item>
+        <item>Mês</item>
+        <item>Ano</item>
+    </string-array>
+</resources>
