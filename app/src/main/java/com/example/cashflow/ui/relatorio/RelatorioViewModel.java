@@ -10,7 +10,7 @@ public class RelatorioViewModel extends ViewModel {
 
     public RelatorioViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is semana fragment");
+        mText.setValue("This is relatorio fragment");
     }
 
     public LiveData<String> getText() {

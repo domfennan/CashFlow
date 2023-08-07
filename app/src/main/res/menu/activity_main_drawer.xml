@@ -12,14 +12,6 @@
             android:id="@+id/nav_relatoiro"
             android:icon="@drawable/ic_relatorio"
             android:title="@string/menu_relatorio" />
-        <!-- <item
-             android:id="@+id/nav_mes"
-             android:icon="@drawable/ic_mes"
-             android:title="@string/menu_mes" />
-         <item
-             android:id="@+id/nav_ano"
-             android:icon="@drawable/ic_ano"
-             android:title="@string/menu_ano" />
-             -->
+
      </group>
  </menu>

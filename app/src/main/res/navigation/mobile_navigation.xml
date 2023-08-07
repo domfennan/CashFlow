@@ -17,16 +17,5 @@
         android:label="@string/menu_relatorio"
         tools:layout="@layout/fragment_relatorio" />
 
-    <fragment
-        android:id="@+id/nav_mes"
-        android:name="com.example.cashflow.ui.mes.MesFragment"
-        android:label="@string/menu_mes"
-        tools:layout="@layout/fragment_mes" />
-    <fragment
-        android:id="@+id/nav_ano"
-        android:name="com.example.cashflow.ui.ano.AnoFragment"
-        android:label="@string/menu_ano"
-        tools:layout="@layout/fragment_ano" />
-
 
 </navigation>
