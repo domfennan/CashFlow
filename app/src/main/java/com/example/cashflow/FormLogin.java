@@ -3,13 +3,17 @@ package com.example.cashflow;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.InputType;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -30,6 +34,13 @@ public class FormLogin extends AppCompatActivity {
     private EditText edit_email, edit_senha;
     private Button bt_entrar;
     private ProgressBar progressBar;
+
+
+    private EditText editSenha;
+    private ImageView imageViewEye;
+
+
+
     String[] mesagens = {"Preencha todos os campos"};
 
     @Override
@@ -38,6 +49,19 @@ public class FormLogin extends AppCompatActivity {
         setContentView(R.layout.activity_form_login);
 
         IniciarComponentes();
+
+
+        editSenha = findViewById(R.id.edit_senha);
+        imageViewEye = findViewById(R.id.imageViewEye);
+
+        // Definindo o OnClickListener para a ImageView
+        imageViewEye.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alterarVisibilidadeSenha();
+            }
+        });
+
 
         text_tela_cadastro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +148,31 @@ public class FormLogin extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+
+    private void alterarVisibilidadeSenha() {
+        // Guardando a posição atual do cursor
+        int cursorPosition = editSenha.getSelectionStart();
+
+        // Verificando se a senha está visível
+        boolean isPasswordVisible = (editSenha.getInputType() & InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
+
+        // Alterando a visibilidade da senha
+        if (isPasswordVisible) {
+            // Escondendo a senha
+            editSenha.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+            imageViewEye.setImageResource(R.drawable.ic_eye_invisible);
+        } else {
+            // Mostrando a senha
+            editSenha.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            imageViewEye.setImageResource(R.drawable.ic_eye);
+        }
+
+        // Restaurando a posição do cursor
+        editSenha.setSelection(cursorPosition);
+    }
+
+
 
     private void IniciarComponentes(){
         text_tela_cadastro = findViewById(R.id.text_tela_cadastro);

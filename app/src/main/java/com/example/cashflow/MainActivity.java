@@ -148,10 +148,9 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
     private void IniciarComponentes(){
         NavigationView navigationView = findViewById(R.id.nav_view);
-        text_tela_conta = navigationView.getHeaderView(0).findViewById(R.id.text_tela_conta);
+        text_tela_conta = navigationView.getHeaderView(0).findViewById(R.id.textNomeUsuarioLateral);
 
         imageUser = navigationView.getHeaderView(0).findViewById(R.id.imageUser);
     }
