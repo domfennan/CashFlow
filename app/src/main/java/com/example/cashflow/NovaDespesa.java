@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.example.cashflow.repositorio.DespesasRepositorio;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -44,7 +45,7 @@ public class NovaDespesa extends AppCompatActivity {
     private EditText edit_valor, edit_descricao;
 
     private String categoriaSelecionada;
-    String[] mesagens = {"Preencha todos os campos", "Cadastro realizado com sucesso"};
+    String[] mesagens = {"Preencha todos os campos", "Despesa salva com sucesso"};
 
     private List<String> categoriasDisponiveis = new ArrayList<>();
 
@@ -128,7 +129,11 @@ public class NovaDespesa extends AppCompatActivity {
                     snackbar.setTextColor(Color.BLACK);
                     snackbar.show();
                 } else {
-                    CadastrarDespesa(view);
+                    DespesasRepositorio.salvarDespesa(valor,descricao,categoriaSelecionada,data);
+                    Snackbar snackbar = Snackbar.make(view, mesagens[1], Snackbar.LENGTH_SHORT);
+                    snackbar.setBackgroundTint(Color.WHITE);
+                    snackbar.setTextColor(Color.BLACK);
+                    snackbar.show();
                 }
             }
         });

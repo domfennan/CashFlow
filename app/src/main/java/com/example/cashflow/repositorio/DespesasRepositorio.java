@@ -6,9 +6,9 @@ public class DespesasRepositorio {
 
     private final DataSource dataSource = new DataSource();
 
-    public void salvarDespesa(double valor, String descricao, String categoria) {
+    public static void salvarDespesa(String valor, String descricao, String categoria, String data) {
         DataSource dataSource = new DataSource();
         String despesaId = "despesaId"; // Substitua pelo ID desejado
-        dataSource.novaDespesa(despesaId, valor, descricao, categoria);
+        dataSource.novaDespesa(despesaId, valor, descricao, categoria, data);
     }
 }
