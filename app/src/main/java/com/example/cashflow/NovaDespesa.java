@@ -1,21 +1,32 @@
 package com.example.cashflow;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,7 +37,15 @@ import java.util.Locale;
 public class NovaDespesa extends AppCompatActivity {
 
     private ImageView bt_voltar;
-    private TextInputEditText editTextData;
+    private EditText edit_data;
+
+    private Button bt_salvar;
+
+    private EditText edit_valor, edit_descricao;
+
+    private String categoriaSelecionada;
+    String[] mesagens = {"Preencha todos os campos", "Cadastro realizado com sucesso"};
+
     private List<String> categoriasDisponiveis = new ArrayList<>();
 
     @Override
@@ -67,8 +86,7 @@ public class NovaDespesa extends AppCompatActivity {
         spinnerCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String categoriaSelecionada = categoriasDisponiveis.get(position);
-                // Faça o que quiser com a categoria selecionada, por exemplo, armazenar em uma variável na sua atividade
+                categoriaSelecionada = categoriasDisponiveis.get(position);
             }
 
             @Override
@@ -76,6 +94,7 @@ public class NovaDespesa extends AppCompatActivity {
                 // Este método é chamado quando nenhum item é selecionado
             }
         });
+
 
 
 
@@ -87,14 +106,38 @@ public class NovaDespesa extends AppCompatActivity {
             }
         });
 
-        editTextData = findViewById(R.id.editTextData);
-        editTextData.setOnClickListener(new View.OnClickListener() {
+        edit_data = findViewById(R.id.edit_data);
+        edit_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog();
             }
         });
+
+        bt_salvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String valor = edit_valor.getText().toString();
+                String descricao = edit_descricao.getText().toString();
+                String data = edit_data.getText().toString();
+
+                if (valor.isEmpty() || descricao.isEmpty() || data.isEmpty() ) {
+                    Snackbar snackbar = Snackbar.make(view, mesagens[0], Snackbar.LENGTH_SHORT);
+                    snackbar.setBackgroundTint(Color.WHITE);
+                    snackbar.setTextColor(Color.BLACK);
+                    snackbar.show();
+                } else {
+                    CadastrarDespesa(view);
+                }
+            }
+        });
     }
+
+    private void CadastrarDespesa(View view){
+
+        
+    };
 
     public void showDatePickerDialog() {
         final Calendar calendar = Calendar.getInstance();
@@ -117,10 +160,16 @@ public class NovaDespesa extends AppCompatActivity {
     private void updateDateEditText(Calendar calendar) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String selectedDate = dateFormat.format(calendar.getTime());
-        editTextData.setText(selectedDate);
+        edit_data.setText(selectedDate);
     }
 
     private void IniciarComponentes() {
         bt_voltar = findViewById(R.id.bt_voltar);
+
+        edit_valor = findViewById(R.id.edit_valor );
+        edit_descricao = findViewById(R.id.edit_descricao );
+        edit_data = findViewById(R.id.edit_data );
+
+        bt_salvar = findViewById(R.id.bt_salvar);
     }
 }
