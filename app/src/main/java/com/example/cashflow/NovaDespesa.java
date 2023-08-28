@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -48,6 +49,8 @@ public class NovaDespesa extends AppCompatActivity {
     String[] mesagens = {"Preencha todos os campos", "Despesa salva com sucesso"};
 
     private List<String> categoriasDisponiveis = new ArrayList<>();
+
+    String usuarioID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,11 +132,21 @@ public class NovaDespesa extends AppCompatActivity {
                     snackbar.setTextColor(Color.BLACK);
                     snackbar.show();
                 } else {
-                    DespesasRepositorio.salvarDespesa(valor,descricao,categoriaSelecionada,data);
+                    usuarioID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    DespesasRepositorio.salvarDespesa(usuarioID,valor,descricao,categoriaSelecionada,data);
                     Snackbar snackbar = Snackbar.make(view, mesagens[1], Snackbar.LENGTH_SHORT);
                     snackbar.setBackgroundTint(Color.WHITE);
                     snackbar.setTextColor(Color.BLACK);
                     snackbar.show();
+                    // Adicionar um atraso de 2 segundos antes de iniciar a nova atividade
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(NovaDespesa.this, MainActivity.class);
+                            startActivity(intent);
+                            finish(); // Fecha a atividade atual
+                        }
+                    }, 1000);
                 }
             }
         });

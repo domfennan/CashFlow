@@ -1,14 +1,17 @@
 package com.example.cashflow.datasource;
 
+import com.example.cashflow.models.Despesa;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DataSource {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public static void novaDespesa(String usuarioID, String valor, String descricao, String categoria, String data) {
 
-    public void novaDespesa(String despesaID, String valor, String descricao, String categoria, String data) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         HashMap<String, Object> despesaMap = new HashMap<>();
         despesaMap.put("despesa", valor);
@@ -16,7 +19,10 @@ public class DataSource {
         despesaMap.put("categoria", categoria);
         despesaMap.put("data", data);
 
-        db.collection("despesas").document().set(despesaMap)
+        db.collection("Usuarios")
+                .document(usuarioID)
+                .collection("Despesas")
+                .add(despesaMap) // Use o método 'add' para criar um novo documento
                 .addOnCompleteListener(task -> {
                     // Ação a ser executada em caso de sucesso
                 })
@@ -24,4 +30,31 @@ public class DataSource {
                     // Tratamento de falha
                 });
     }
+    public static void getDespesas(String usuarioID, OnDespesasLoadedListener listener) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("Usuarios")
+                .document(usuarioID)
+                .collection("Despesas")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        ArrayList<Despesa> despesas = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            // Mapeie o documento para um objeto Despesa
+                            Despesa despesa = document.toObject(Despesa.class);
+                            despesas.add(despesa);
+                        }
+                        listener.onDespesasLoaded(despesas);
+                    } else {
+                        // Tratamento de falha
+                    }
+                });
+    }
+
+    public interface OnDespesasLoadedListener {
+        void onDespesasLoaded(ArrayList<Despesa> despesas);
+    }
 }
+
+

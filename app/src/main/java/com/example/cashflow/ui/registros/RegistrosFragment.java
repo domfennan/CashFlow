@@ -50,6 +50,7 @@ public class RegistrosFragment extends Fragment implements DespesaItemClickListe
         despesaAdapter.setDataSet(dataSource);
     }
 
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
