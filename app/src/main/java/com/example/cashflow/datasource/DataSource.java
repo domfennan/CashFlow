@@ -1,7 +1,5 @@
 package com.example.cashflow.datasource;
 
-import android.util.Log;
-
 import com.example.cashflow.models.Despesa;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -48,12 +46,8 @@ public class DataSource {
                             despesas.add(despesa);
                         }
                         listener.onDespesasLoaded(despesas);
-
-                        // Adicione logs ou mensagens de depuração aqui
-                        Log.d("getDespesas", "Total de despesas recuperadas: " + despesas.size());
                     } else {
                         // Tratamento de falha
-                        Log.e("getDespesas", "Erro ao recuperar despesas: " + task.getException().getMessage());
                     }
                 });
     }
