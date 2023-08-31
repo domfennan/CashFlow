@@ -7,7 +7,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class DataSource {
+public class DataSourceFirebase {
 
     public static void novaDespesa(String usuarioID, String valor, String descricao, String categoria, String data) {
 
@@ -42,7 +42,12 @@ public class DataSource {
                         ArrayList<Despesa> despesas = new ArrayList<>();
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             // Mapeie o documento para um objeto Despesa
-                            Despesa despesa = document.toObject(Despesa.class);
+                            Despesa despesa = new Despesa();
+                            despesa.setValor((String) document.get("despesa"));
+                            despesa.setDescricao((String) document.get("descricao"));
+                            despesa.setCategoria((String) document.get("categoria"));
+                            despesa.setData((String) document.get("data"));
+                            // Outros campos como lugar, se aplicável
                             despesas.add(despesa);
                         }
                         listener.onDespesasLoaded(despesas);

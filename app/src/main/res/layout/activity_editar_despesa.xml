@@ -15,6 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbareditardespesa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/blue">
@@ -24,9 +25,9 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:src="@drawable/ic_cancelar"
-                app:layout_constraintTop_toTopOf="@id/toolbar"
-                app:layout_constraintStart_toStartOf="@id/toolbar"
-                app:layout_constraintBottom_toBottomOf="@id/toolbar"
+                app:layout_constraintTop_toTopOf="@id/toolbareditardespesa"
+                app:layout_constraintStart_toStartOf="@id/toolbareditardespesa"
+                app:layout_constraintBottom_toBottomOf="@id/toolbareditardespesa"
                 android:layout_marginLeft="12dp"
                 app:tint="@color/white" />
 
@@ -35,9 +36,9 @@
                 android:layout_height="wrap_content"
                 android:text="Editar"
                 android:textColor="@color/white"
-                app:layout_constraintTop_toTopOf="@id/toolbar"
-                app:layout_constraintStart_toStartOf="@id/toolbar"
-                app:layout_constraintBottom_toBottomOf="@id/toolbar"
+                app:layout_constraintTop_toTopOf="@id/toolbareditardespesa"
+                app:layout_constraintStart_toStartOf="@id/toolbareditardespesa"
+                app:layout_constraintBottom_toBottomOf="@id/toolbareditardespesa"
                 android:layout_marginLeft="25dp"
                 android:textSize="20sp"
                 />

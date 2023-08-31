@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbarNovaDespesa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/blue">
@@ -25,9 +25,9 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:src="@drawable/ic_cancelar"
-                app:layout_constraintTop_toTopOf="@id/toolbar"
-                app:layout_constraintStart_toStartOf="@id/toolbar"
-                app:layout_constraintBottom_toBottomOf="@id/toolbar"
+                app:layout_constraintTop_toTopOf="@id/toolbarNovaDespesa"
+                app:layout_constraintStart_toStartOf="@id/toolbarNovaDespesa"
+                app:layout_constraintBottom_toBottomOf="@id/toolbarNovaDespesa"
                 android:layout_marginLeft="12dp"
                 app:tint="@color/white" />
 
@@ -36,9 +36,9 @@
                 android:layout_height="wrap_content"
                 android:text="Nova despesa"
                 android:textColor="@color/white"
-                app:layout_constraintTop_toTopOf="@id/toolbar"
-                app:layout_constraintStart_toStartOf="@id/toolbar"
-                app:layout_constraintBottom_toBottomOf="@id/toolbar"
+                app:layout_constraintTop_toTopOf="@id/toolbarNovaDespesa"
+                app:layout_constraintStart_toStartOf="@id/toolbarNovaDespesa"
+                app:layout_constraintBottom_toBottomOf="@id/toolbarNovaDespesa"
                 android:layout_marginLeft="25dp"
                 android:textSize="20sp"
                 />

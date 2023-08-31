@@ -2,6 +2,7 @@ package com.example.cashflow.ui.registros;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +15,18 @@ import com.example.cashflow.DespesaAdapter;
 import com.example.cashflow.DetalheDespesa;
 import com.example.cashflow.DespesaItemClickListener;
 import com.example.cashflow.databinding.FragmentRegistrosBinding;
+import com.example.cashflow.datasource.DataSourceFirebase;
 import com.example.cashflow.models.Despesa;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class RegistrosFragment extends Fragment implements DespesaItemClickListener {
 
     private FragmentRegistrosBinding binding;
     private DespesaAdapter despesaAdapter;
+    String usuarioID;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,12 +49,23 @@ public class RegistrosFragment extends Fragment implements DespesaItemClickListe
         binding.recyclerview.setAdapter(despesaAdapter);
     }
 
+
+
     private void addDataSource() {
-        // Aqui você pode obter os dados de acordo com a lógica do seu aplicativo
-        // Neste exemplo, estou usando um DataSource fictício para fins de demonstração
-        ArrayList<Despesa> dataSource = DataSource.createDataSet();
-        despesaAdapter.setDataSet(dataSource);
+
+        usuarioID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        Log.d("RegistrosFragment", "addDataSource: Fetching despesas...");
+        com.example.cashflow.datasource.DataSourceFirebase.getDespesas(usuarioID, new DataSourceFirebase.OnDespesasLoadedListener(){
+
+            @Override
+            public void onDespesasLoaded(ArrayList<Despesa> despesas) {
+                Log.d("RegistrosFragment", "onDespesasLoaded: " + despesas.size() + " despesas loaded.");
+                binding.toolbar.setVisibility(View.GONE);
+                despesaAdapter.setDataSet(despesas);
+            }
+        });
     }
+
 
 
     @Override

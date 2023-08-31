@@ -1,12 +1,13 @@
 package com.example.cashflow;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.cashflow.databinding.ResItemDespesaBinding;
 import com.example.cashflow.models.Despesa;
 
@@ -28,6 +29,7 @@ public class DespesaAdapter extends RecyclerView.Adapter<DespesaAdapter.DespesaV
     @NonNull
     @Override
     public DespesaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.d("DespesaAdapter", "onCreateViewHolder");
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ResItemDespesaBinding binding = ResItemDespesaBinding.inflate(layoutInflater, parent, false);
         return new DespesaViewHolder(binding.getRoot());
@@ -36,10 +38,12 @@ public class DespesaAdapter extends RecyclerView.Adapter<DespesaAdapter.DespesaV
     @Override
     public void onBindViewHolder(@NonNull DespesaViewHolder holder, int position) {
         holder.bind(items.get(position));
+        Log.d("DespesaAdapter", "onBindViewHolder");
     }
 
     @Override
     public int getItemCount() {
+        Log.d("DespesaAdapter", "getItemCount: " + (items != null ? items.size() : 0));
         return items != null ? items.size() : 0;
     }
 
@@ -53,6 +57,10 @@ public class DespesaAdapter extends RecyclerView.Adapter<DespesaAdapter.DespesaV
         }
 
         public void bind(Despesa despesa) {
+            Log.d("DespesaAdapter", "Categoria: " + despesa.getCategoria());
+            Log.d("DespesaAdapter", "Descrição: " + despesa.getDescricao());
+            Log.d("DespesaAdapter", "Valor: " + despesa.getValor());
+
             binding.categoria.setText(despesa.getCategoria());
             binding.descricao.setText(despesa.getDescricao());
             String valorFormatado = "-R$ " + despesa.getValor();

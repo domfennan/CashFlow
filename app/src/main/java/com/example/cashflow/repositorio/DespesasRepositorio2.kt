@@ -9,4 +9,8 @@ class DespesasRepositorio2() {
     fun salvarDespesa(valor: Double, descricao: String, categoria: String){
         dataSource2.novaDespesa(valor,descricao,categoria)
     }
+
+    fun recuperarDespesas(){
+
+    }
 }

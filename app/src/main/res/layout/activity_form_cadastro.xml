@@ -73,6 +73,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarformcadastro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/blue">
@@ -82,9 +83,9 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_voltar"
-                app:layout_constraintTop_toTopOf="@id/toolbar"
-                app:layout_constraintStart_toStartOf="@id/toolbar"
-                app:layout_constraintBottom_toBottomOf="@id/toolbar"
+                app:layout_constraintTop_toTopOf="@id/toolbarformcadastro"
+                app:layout_constraintStart_toStartOf="@id/toolbarformcadastro"
+                app:layout_constraintBottom_toBottomOf="@id/toolbarformcadastro"
                 android:layout_marginLeft="12dp"
                 app:tint="@color/white" />
 
@@ -93,9 +94,9 @@
                 android:layout_height="wrap_content"
                 android:text="Voltar"
                 android:textColor="@color/white"
-                app:layout_constraintTop_toTopOf="@id/toolbar"
-                app:layout_constraintStart_toStartOf="@id/toolbar"
-                app:layout_constraintBottom_toBottomOf="@id/toolbar"
+                app:layout_constraintTop_toTopOf="@id/toolbarformcadastro"
+                app:layout_constraintStart_toStartOf="@id/toolbarformcadastro"
+                app:layout_constraintBottom_toBottomOf="@id/toolbarformcadastro"
                 android:layout_marginLeft="25dp"
                 android:textSize="20sp"
                 />

@@ -4,25 +4,22 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Despesa implements Serializable {
-    private double valor;
+    private String valor;
     private String descricao;
     private String categoria;
     private String data;
     private String lugar;
 
-    public Despesa(double valor, String descricao, String categoria, String data, String lugar) {
-        this.valor = valor;
-        this.descricao = descricao;
-        this.categoria = categoria;
-        this.data = data;
-        this.lugar = lugar;
+
+    public Despesa() {
+
     }
 
-    public double getValor() {
+    public String getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(String valor) {
         this.valor = valor;
     }
 
@@ -63,10 +60,11 @@ public class Despesa implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Despesa despesa = (Despesa) o;
-        return Double.compare(despesa.valor, valor) == 0 &&
+        return Objects.equals(valor, despesa.valor) &&
                 Objects.equals(descricao, despesa.descricao) &&
                 Objects.equals(categoria, despesa.categoria);
     }
+
 
     @Override
     public int hashCode() {
@@ -82,4 +80,3 @@ public class Despesa implements Serializable {
                 '}';
     }
 }
-
