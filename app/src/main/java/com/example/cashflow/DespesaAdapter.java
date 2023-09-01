@@ -20,6 +20,7 @@ public class DespesaAdapter extends RecyclerView.Adapter<DespesaAdapter.DespesaV
 
     public void setDataSet(List<Despesa> despesas) {
         this.items = despesas;
+        notifyDataSetChanged(); // Adicione esta linha para notificar o adapter sobre as mudanças
     }
 
     public void setDespesaItemClickListener(DespesaItemClickListener listener) {
@@ -73,4 +74,6 @@ public class DespesaAdapter extends RecyclerView.Adapter<DespesaAdapter.DespesaV
             });
         }
     }
+
+
 }

@@ -49,8 +49,6 @@ public class RegistrosFragment extends Fragment implements DespesaItemClickListe
         binding.recyclerview.setAdapter(despesaAdapter);
     }
 
-
-
     private void addDataSource() {
 
         usuarioID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
@@ -60,13 +58,10 @@ public class RegistrosFragment extends Fragment implements DespesaItemClickListe
             @Override
             public void onDespesasLoaded(ArrayList<Despesa> despesas) {
                 Log.d("RegistrosFragment", "onDespesasLoaded: " + despesas.size() + " despesas loaded.");
-                binding.toolbar.setVisibility(View.GONE);
                 despesaAdapter.setDataSet(despesas);
             }
         });
     }
-
-
 
     @Override
     public void onDestroyView() {
