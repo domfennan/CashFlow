@@ -1,15 +1,20 @@
 package com.example.cashflow;
+import android.Manifest;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,8 +23,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.cashflow.repositorio.DespesasRepositorio;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -52,13 +63,39 @@ public class NovaDespesa extends AppCompatActivity {
 
     String usuarioID;
 
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 123; // Um código de solicitação de permissão arbitrário
+    private FusedLocationProviderClient fusedLocationClient; // Adicione esta linha
+    private TextView textAdicionarLocal; // TextView "ADICIONAR LOCAL"
+    private LocationRequest locationRequest;
+    private LocationCallback locationCallback;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nova_despesa);
         getSupportActionBar().hide();
         IniciarComponentes();
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this); // Inicialize o FusedLocationProviderClient
+        locationRequest = new LocationRequest();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(10000); // Intervalo em milissegundos para atualizações de localização
+        textAdicionarLocal = findViewById(R.id.textAdicionarLocal);
 
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult != null) {
+                    Location location = locationResult.getLastLocation();
+                    // Aqui você pode usar a localização obtida (latitude e longitude)
+                    double latitude = location.getLatitude();
+                    double longitude = location.getLongitude();
+                    // Faça algo com a localização aqui
+                    Log.d("LocationInfo", "Latitude: " + latitude + ", Longitude: " + longitude);
+
+                }
+            }
+        };
 
 
         Spinner spinnerCategoria = findViewById(R.id.spinnerCategoria);
@@ -98,7 +135,6 @@ public class NovaDespesa extends AppCompatActivity {
                 // Este método é chamado quando nenhum item é selecionado
             }
         });
-
 
 
 
@@ -150,6 +186,19 @@ public class NovaDespesa extends AppCompatActivity {
                 }
             }
         });
+        textAdicionarLocal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Verificar se as permissões de localização estão concedidas
+                if (checkLocationPermission()) {
+                    startLocationUpdates();
+                } else {
+                    // Caso as permissões não estejam concedidas, solicite-as
+                    requestLocationPermission();
+                }
+            }
+        });
+
     }
 
     private void CadastrarDespesa(View view){
@@ -190,4 +239,45 @@ public class NovaDespesa extends AppCompatActivity {
 
         bt_salvar = findViewById(R.id.bt_salvar);
     }
+
+    private boolean checkLocationPermission() {
+        // Verifique se as permissões de localização estão concedidas
+        int permissionState = ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+        return permissionState == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestLocationPermission() {
+        // Solicite permissão de localização ao usuário
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                LOCATION_PERMISSION_REQUEST_CODE);
+    }
+
+    private void startLocationUpdates() {
+        // Verifique se as permissões de localização estão concedidas
+        if (checkLocationPermission()) {
+            // Permissão de localização concedida, inicie as atualizações de localização
+            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+        } else {
+            // Caso as permissões não estejam concedidas, solicite-as
+            requestLocationPermission();
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permissão de localização concedida, inicie o serviço de localização aqui.
+                startLocationUpdates();
+            } else {
+                // Permissão de localização negada, informe ao usuário que a funcionalidade de localização não funcionará.
+                Snackbar.make(findViewById(android.R.id.content), "Permissão de localização negada.", Snackbar.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 }
