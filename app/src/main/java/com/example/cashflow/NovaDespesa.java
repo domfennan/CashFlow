@@ -1,4 +1,5 @@
 package com.example.cashflow;
+
 import android.Manifest;
 
 import androidx.annotation.NonNull;
@@ -63,6 +64,9 @@ public class NovaDespesa extends AppCompatActivity {
 
     String usuarioID;
 
+    private Location lastLocation;
+
+
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 123; // Um código de solicitação de permissão arbitrário
     private FusedLocationProviderClient fusedLocationClient; // Adicione esta linha
     private TextView textAdicionarLocal; // TextView "ADICIONAR LOCAL"
@@ -86,10 +90,10 @@ public class NovaDespesa extends AppCompatActivity {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 if (locationResult != null) {
-                    Location location = locationResult.getLastLocation();
+                    lastLocation = locationResult.getLastLocation(); // Armazena a localização
                     // Aqui você pode usar a localização obtida (latitude e longitude)
-                    double latitude = location.getLatitude();
-                    double longitude = location.getLongitude();
+                    double latitude = lastLocation.getLatitude();
+                    double longitude = lastLocation.getLongitude();
                     // Faça algo com a localização aqui
                     Log.d("LocationInfo", "Latitude: " + latitude + ", Longitude: " + longitude);
 
@@ -137,7 +141,6 @@ public class NovaDespesa extends AppCompatActivity {
         });
 
 
-
         bt_voltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,14 +165,23 @@ public class NovaDespesa extends AppCompatActivity {
                 String descricao = edit_descricao.getText().toString();
                 String data = edit_data.getText().toString();
 
-                if (valor.isEmpty() || descricao.isEmpty() || data.isEmpty() ) {
+                if (valor.isEmpty() || descricao.isEmpty() || data.isEmpty()) {
                     Snackbar snackbar = Snackbar.make(view, mesagens[0], Snackbar.LENGTH_SHORT);
                     snackbar.setBackgroundTint(Color.WHITE);
                     snackbar.setTextColor(Color.BLACK);
                     snackbar.show();
                 } else {
                     usuarioID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    DespesasRepositorio.salvarDespesa(usuarioID,valor,descricao,categoriaSelecionada,data);
+
+                    if (lastLocation != null) {
+                        double latitude = lastLocation.getLatitude();
+                        double longitude = lastLocation.getLongitude();
+                        Log.d("LocationInfoifelse", "Latitude: " + latitude + ", Longitude: " + longitude);
+                        DespesasRepositorio.salvarDespesa(usuarioID, valor, descricao, categoriaSelecionada, data, latitude, longitude);
+                    } else {
+                        DespesasRepositorio.salvarDespesa2(usuarioID, valor, descricao, categoriaSelecionada, data);
+                    }
+
                     Snackbar snackbar = Snackbar.make(view, mesagens[1], Snackbar.LENGTH_SHORT);
                     snackbar.setBackgroundTint(Color.WHITE);
                     snackbar.setTextColor(Color.BLACK);
@@ -201,10 +213,13 @@ public class NovaDespesa extends AppCompatActivity {
 
     }
 
-    private void CadastrarDespesa(View view){
 
-        
-    };
+    private void CadastrarDespesa(View view) {
+
+
+    }
+
+    ;
 
     public void showDatePickerDialog() {
         final Calendar calendar = Calendar.getInstance();
@@ -233,9 +248,9 @@ public class NovaDespesa extends AppCompatActivity {
     private void IniciarComponentes() {
         bt_voltar = findViewById(R.id.bt_voltar);
 
-        edit_valor = findViewById(R.id.edit_valor );
-        edit_descricao = findViewById(R.id.edit_descricao );
-        edit_data = findViewById(R.id.edit_data );
+        edit_valor = findViewById(R.id.edit_valor);
+        edit_descricao = findViewById(R.id.edit_descricao);
+        edit_data = findViewById(R.id.edit_data);
 
         bt_salvar = findViewById(R.id.bt_salvar);
     }

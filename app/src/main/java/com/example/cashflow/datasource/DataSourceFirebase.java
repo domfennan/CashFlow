@@ -9,7 +9,31 @@ import java.util.HashMap;
 
 public class DataSourceFirebase {
 
-    public static void novaDespesa(String usuarioID, String valor, String descricao, String categoria, String data) {
+    public static void novaDespesa(String usuarioID, String valor, String descricao, String categoria, String data, double latitude, double longitude) {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        HashMap<String, Object> despesaMap = new HashMap<>();
+        despesaMap.put("despesa", valor);
+        despesaMap.put("descricao", descricao);
+        despesaMap.put("categoria", categoria);
+        despesaMap.put("data", data);
+
+        despesaMap.put("latitude", latitude);
+        despesaMap.put("longitude", longitude);
+
+        db.collection("Usuarios")
+                .document(usuarioID)
+                .collection("Despesas")
+                .add(despesaMap) // Use o método 'add' para criar um novo documento
+                .addOnCompleteListener(task -> {
+                    // Ação a ser executada em caso de sucesso
+                })
+                .addOnFailureListener(e -> {
+                    // Tratamento de falha
+                });
+    }
+    public static void novaDespesa2(String usuarioID, String valor, String descricao, String categoria, String data) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -30,6 +54,7 @@ public class DataSourceFirebase {
                     // Tratamento de falha
                 });
     }
+
     public static void getDespesas(String usuarioID, OnDespesasLoadedListener listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -47,6 +72,11 @@ public class DataSourceFirebase {
                             despesa.setDescricao((String) document.get("descricao"));
                             despesa.setCategoria((String) document.get("categoria"));
                             despesa.setData((String) document.get("data"));
+                            // Campos de latitude e longitude, se estiverem presentes no documento
+                            if (document.contains("latitude") && document.contains("longitude")) {
+                                despesa.setLatitude((Double) document.get("latitude"));
+                                despesa.setLongitude((Double) document.get("longitude"));
+                            }
                             // Outros campos como lugar, se aplicável
                             despesas.add(despesa);
                         }

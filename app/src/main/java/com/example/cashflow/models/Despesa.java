@@ -9,7 +9,8 @@ public class Despesa implements Serializable {
     private String categoria;
     private String data;
     private String lugar;
-
+    private double latitude; // Adicione o campo de latitude
+    private double longitude; // Adicione o campo de longitude
 
     public Despesa() {
 
@@ -53,6 +54,22 @@ public class Despesa implements Serializable {
 
     public void setLugar(String lugar) {
         this.lugar = lugar;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     @Override
