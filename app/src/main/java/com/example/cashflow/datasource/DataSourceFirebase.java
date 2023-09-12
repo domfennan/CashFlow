@@ -72,6 +72,10 @@ public class DataSourceFirebase {
                             despesa.setDescricao((String) document.get("descricao"));
                             despesa.setCategoria((String) document.get("categoria"));
                             despesa.setData((String) document.get("data"));
+
+                            despesa.setIdDoFirestore(document.getId());
+
+
                             // Campos de latitude e longitude, se estiverem presentes no documento
                             if (document.contains("latitude") && document.contains("longitude")) {
                                 despesa.setLatitude((Double) document.get("latitude"));

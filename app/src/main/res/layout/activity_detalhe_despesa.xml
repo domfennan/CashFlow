@@ -73,62 +73,45 @@
 
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutValorDetalhe"
+    <EditText
+        android:id="@+id/edit_valor_detalhe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="valor"
         android:layout_marginTop="65dp"
+        android:hint=""
+        android:inputType="number"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        >
+        />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutDescricaoDetalhe"
+    <EditText
+        android:id="@+id/edit_descricao_detalhe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Descrição"
+        android:hint=""
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutValorDetalhe"
+        app:layout_constraintTop_toBottomOf="@+id/edit_valor_detalhe"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        >
+        android:inputType="text"
+        />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutDataDetalhe"
+    <EditText
+        android:id="@+id/edit_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Data"
+        android:hint=""
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDescricaoDetalhe"
+        app:layout_constraintTop_toBottomOf="@+id/edit_descricao_detalhe"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextDataDetalhe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:inputType="none"
-            android:clickable="true"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_marginRight="10dp"
+        android:focusable="false"
+        android:inputType="none"
+        android:clickable="true"
+        />
 
     <TextView
         android:id="@+id/textCategoiraDetalhe"
@@ -138,15 +121,15 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDataDetalhe"
+        app:layout_constraintTop_toBottomOf="@+id/edit_data"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
 
-    <Spinner
-        android:id="@+id/spinnerCategoriaDetalhe"
+    <TextView
+        android:id="@+id/text_categoria_detalhe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/textCategoiraDetalhe"
@@ -162,7 +145,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerCategoriaDetalhe"
+        app:layout_constraintTop_toBottomOf="@+id/text_categoria_detalhe"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="10dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -170,10 +153,10 @@
         />
 
     <TextView
-        android:id="@+id/textAdicionarLocalDetalhe"
+        android:id="@+id/text_local_detalhe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ADICIONAR LOCAL"
+        android:text=""
         android:textColor="@color/blue"
         android:textSize="16sp"
         android:layout_marginTop="8dp"

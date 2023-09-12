@@ -3,6 +3,7 @@ package com.example.cashflow;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +22,10 @@ public class DetalheDespesa extends AppCompatActivity {
         getSupportActionBar().hide();
 
         IniciarComponentes();
+
+
+        String despesaID = getIntent().getStringExtra("despesaID");
+        Log.d("DetalheDespesa1", "ID da Despesa: " + despesaID);
 
 
         bt_voltar.setOnClickListener(new View.OnClickListener() {

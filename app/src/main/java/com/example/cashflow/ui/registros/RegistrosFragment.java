@@ -58,6 +58,19 @@ public class RegistrosFragment extends Fragment implements DespesaItemClickListe
             @Override
             public void onDespesasLoaded(ArrayList<Despesa> despesas) {
                 Log.d("RegistrosFragment", "onDespesasLoaded: " + despesas.size() + " despesas loaded.");
+
+
+                for (int i = 0; i < despesas.size(); i++) {
+                    Despesa despesa = despesas.get(i);
+
+                    // O ID do documento pode ser obtido diretamente do Firestore
+                    String idDoFirestore = despesas.get(i).getIdDoFirestore(); // Supondo que o método getId() retorne o ID do documento
+
+                    // Atribua o ID do documento à despesa
+                    despesa.setIdDoFirestore(idDoFirestore);
+                }
+
+
                 despesaAdapter.setDataSet(despesas);
             }
         });
@@ -71,10 +84,12 @@ public class RegistrosFragment extends Fragment implements DespesaItemClickListe
 
     @Override
     public void onDespesaItemClick(Despesa despesa) {
-        // Aqui você pode abrir a tela DetalheDespesa e passar os dados da despesa
+        // Aqui você pode abrir a tela DetalheDespesa e passar o ID da despesa
+        // em vez do objeto Despesa completo
         // Exemplo usando Intent:
         Intent intent = new Intent(requireContext(), DetalheDespesa.class);
-        intent.putExtra("despesa", despesa);
+        intent.putExtra("despesaID", despesa.getIdDoFirestore()); // Use o ID do Firestore
         startActivity(intent);
     }
+
 }

@@ -9,12 +9,27 @@ public class Despesa implements Serializable {
     private String categoria;
     private String data;
     private String lugar;
+
+    private String idDoFirestore;
+
+
     private double latitude; // Adicione o campo de latitude
     private double longitude; // Adicione o campo de longitude
 
     public Despesa() {
 
     }
+
+
+    public String getIdDoFirestore() {
+        return idDoFirestore;
+    }
+    public void setIdDoFirestore(String idDoFirestore) {
+        this.idDoFirestore = idDoFirestore;
+    }
+
+
+
 
     public String getValor() {
         return valor;
