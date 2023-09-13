@@ -1,7 +1,12 @@
 package com.example.cashflow;
 
+import static com.example.cashflow.datasource.DataSourceFirebase.excluirDespesa;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +27,7 @@ import java.util.Objects;
 public class DetalheDespesa extends AppCompatActivity {
     String usuarioID;
     private ImageView bt_voltar;
+    private ImageView bt_delete;
 
     private TextView valorDespesa;
     private TextView descricaoDespesa;
@@ -81,7 +87,15 @@ public class DetalheDespesa extends AppCompatActivity {
 
         });
 
-
+        com.example.cashflow.datasource.DataSourceFirebase.registrarOuvinteExclusaoDespesa(usuarioID, despesaID, new DataSourceFirebase.OnDespesaExcluidaListener() {
+            @Override
+            public void onDespesaExcluida() {
+                // Despesa excluída com sucesso, você pode tomar ação aqui, como retornar à lista de despesas
+                Intent intent = new Intent(DetalheDespesa.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         bt_voltar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,12 +104,40 @@ public class DetalheDespesa extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
 
+        bt_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Exibir um AlertDialog de confirmação antes de excluir
+                AlertDialog.Builder builder = new AlertDialog.Builder(DetalheDespesa.this);
+                builder.setTitle("Confirmar Exclusão");
+                builder.setMessage("Tem certeza de que deseja excluir esta despesa?");
+                builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Se o usuário clicar em "Sim", exclua a despesa
+                        excluirDespesa(usuarioID, despesaID);
+                    }
+                });
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Se o usuário clicar em "Cancelar", feche o AlertDialog
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
+
+    }
 
 
     private void IniciarComponentes() {
         bt_voltar = findViewById(R.id.bt_voltar);
+        bt_delete = findViewById(R.id.bt_delete);
 
         valorDespesa = findViewById(R.id.edit_valor_detalhe);
         descricaoDespesa = findViewById(R.id.edit_descricao_detalhe);

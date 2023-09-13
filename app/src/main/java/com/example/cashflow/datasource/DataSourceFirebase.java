@@ -91,8 +91,53 @@ public class DataSourceFirebase {
                 });
     }
 
+    public static void excluirDespesa(String usuarioID, String despesaID) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("Usuarios")
+                .document(usuarioID)
+                .collection("Despesas")
+                .document(despesaID)
+                .delete()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // A despesa foi excluída com sucesso
+                    } else {
+                        // Tratamento de falha
+                    }
+                });
+    }
+
+
+    public static void registrarOuvinteExclusaoDespesa(String usuarioID, String despesaID, OnDespesaExcluidaListener listener) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("Usuarios")
+                .document(usuarioID)
+                .collection("Despesas")
+                .document(despesaID)
+                .addSnapshotListener((documentSnapshot, e) -> {
+                    if (e != null) {
+                        // Tratamento de erro
+                        return;
+                    }
+
+                    if (documentSnapshot != null && documentSnapshot.exists()) {
+                        // O documento ainda existe, não foi excluído
+                    } else {
+                        // O documento foi excluído, chame o callback
+                        listener.onDespesaExcluida();
+                    }
+                });
+    }
+
+
     public interface OnDespesasLoadedListener {
         void onDespesasLoaded(ArrayList<Despesa> despesas);
+    }
+
+    public interface OnDespesaExcluidaListener {
+        void onDespesaExcluida();
     }
 }
 
