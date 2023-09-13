@@ -1,5 +1,6 @@
 package com.example.cashflow;
 
+import static com.example.cashflow.datasource.DataSourceFirebase.atualizarDetalhesDespesa;
 import static com.example.cashflow.datasource.DataSourceFirebase.excluirDespesa;
 
 import androidx.annotation.NonNull;
@@ -9,10 +10,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cashflow.datasource.DataSourceFirebase;
 import com.example.cashflow.models.Despesa;
@@ -40,6 +44,8 @@ public class DetalheDespesa extends AppCompatActivity {
 
 
     private ListenerRegistration despesaListener;
+
+    private ImageView bt_editar;
 
 
     @Override
@@ -132,6 +138,55 @@ public class DetalheDespesa extends AppCompatActivity {
             }
         });
 
+
+        bt_editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(DetalheDespesa.this);
+                builder.setTitle("Confirmar Edição");
+                builder.setMessage("Tem certeza de que deseja salvar as alterações?");
+
+                builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Obtenha os novos valores dos campos de texto
+                        String novoDespesaText = valorDespesa.getText().toString();
+                        String novaDescricaoText = descricaoDespesa.getText().toString();
+
+                        // Chame o método para atualizar a despesa
+                        atualizarDetalhesDespesa(usuarioID, despesaID, novoDespesaText, novaDescricaoText);
+
+                        // Exiba uma mensagem de sucesso
+                        Toast.makeText(DetalheDespesa.this, "Edição da despesa foi salva com sucesso", Toast.LENGTH_SHORT).show();
+
+                        // Aguarde alguns segundos antes de voltar para a MainActivity
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(DetalheDespesa.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }, 1000); // 2000 milissegundos (2 segundos) de atraso
+                    }
+                });
+
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // O usuário cancelou a edição, não faça nada
+                    }
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
+
+
+
+
     }
 
 
@@ -143,9 +198,11 @@ public class DetalheDespesa extends AppCompatActivity {
         descricaoDespesa = findViewById(R.id.edit_descricao_detalhe);
         categoriaDespesa = findViewById(R.id.spinnerCategoria);
         dataDespesa = findViewById(R.id.edit_data);
+
         latitudeDespesa = findViewById(R.id.text_local_latitude_detalhe);
         longitudeDespesa = findViewById(R.id.text_local_longitude_detalhe);
 
+        bt_editar = findViewById(R.id.bt_editar);
     }
 
     protected void onDestroy() {

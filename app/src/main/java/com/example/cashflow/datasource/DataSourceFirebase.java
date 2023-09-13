@@ -6,6 +6,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class DataSourceFirebase {
 
@@ -130,6 +131,32 @@ public class DataSourceFirebase {
                     }
                 });
     }
+
+
+    public static void atualizarDetalhesDespesa(String usuarioID, String despesaID, String novoDespesa, String novaDescricao) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        // Crie um mapa com o novo valor para "despesa"
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("despesa", novoDespesa);
+        updates.put("descricao", novaDescricao);
+
+
+        db.collection("Usuarios")
+                .document(usuarioID)
+                .collection("Despesas")
+                .document(despesaID)
+                .update(updates)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Atualização bem-sucedida, faça o que for necessário
+                    } else {
+                        // Trate a falha na atualização, se necessário
+                    }
+                });
+    }
+
+
 
 
     public interface OnDespesasLoadedListener {

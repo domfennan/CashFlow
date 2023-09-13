@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cashflow.repositorio.DespesasRepositorio;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -73,6 +74,9 @@ public class NovaDespesa extends AppCompatActivity {
     private LocationRequest locationRequest;
     private LocationCallback locationCallback;
 
+    private TextView latitudeDespesa;
+    private TextView longitudeDespesa;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +100,8 @@ public class NovaDespesa extends AppCompatActivity {
                     double longitude = lastLocation.getLongitude();
                     // Faça algo com a localização aqui
                     Log.d("LocationInfo", "Latitude: " + latitude + ", Longitude: " + longitude);
+                    latitudeDespesa.setText(String.valueOf(latitude));
+                    longitudeDespesa.setText(String.valueOf(longitude));
 
                 }
             }
@@ -166,10 +172,7 @@ public class NovaDespesa extends AppCompatActivity {
                 String data = edit_data.getText().toString();
 
                 if (valor.isEmpty() || descricao.isEmpty() || data.isEmpty()) {
-                    Snackbar snackbar = Snackbar.make(view, mesagens[0], Snackbar.LENGTH_SHORT);
-                    snackbar.setBackgroundTint(Color.WHITE);
-                    snackbar.setTextColor(Color.BLACK);
-                    snackbar.show();
+                    Toast.makeText(NovaDespesa.this, mesagens[0], Toast.LENGTH_SHORT).show();
                 } else {
                     usuarioID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -182,10 +185,8 @@ public class NovaDespesa extends AppCompatActivity {
                         DespesasRepositorio.salvarDespesa2(usuarioID, valor, descricao, categoriaSelecionada, data);
                     }
 
-                    Snackbar snackbar = Snackbar.make(view, mesagens[1], Snackbar.LENGTH_SHORT);
-                    snackbar.setBackgroundTint(Color.WHITE);
-                    snackbar.setTextColor(Color.BLACK);
-                    snackbar.show();
+                    Toast.makeText(NovaDespesa.this, mesagens[1], Toast.LENGTH_SHORT).show();
+
                     // Adicionar um atraso de 2 segundos antes de iniciar a nova atividade
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -198,6 +199,7 @@ public class NovaDespesa extends AppCompatActivity {
                 }
             }
         });
+
         textAdicionarLocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -219,7 +221,7 @@ public class NovaDespesa extends AppCompatActivity {
 
     }
 
-    ;
+
 
     public void showDatePickerDialog() {
         final Calendar calendar = Calendar.getInstance();
@@ -253,6 +255,9 @@ public class NovaDespesa extends AppCompatActivity {
         edit_data = findViewById(R.id.edit_data);
 
         bt_salvar = findViewById(R.id.bt_salvar);
+
+        latitudeDespesa = findViewById(R.id.text_local_latitude_detalhe);
+        longitudeDespesa = findViewById(R.id.text_local_longitude_detalhe);
     }
 
     private boolean checkLocationPermission() {
