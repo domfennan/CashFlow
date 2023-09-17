@@ -123,6 +123,7 @@ public class DetalheDespesa extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // Se o usuário clicar em "Sim", exclua a despesa
                         excluirDespesa(usuarioID, despesaID);
+                        Toast.makeText(DetalheDespesa.this, "Despesa excluída com sucesso", Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {

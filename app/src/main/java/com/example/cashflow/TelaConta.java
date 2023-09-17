@@ -40,6 +40,8 @@ public class TelaConta extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String usuarioID;
 
+    private TextView cidadeUsuario;
+
 
     private static final int CAMERA_REQUEST_CODE = 1001;
     private static final int CAMERA_PERMISSION_CODE = 101;
@@ -113,6 +115,7 @@ public class TelaConta extends AppCompatActivity {
                 if (documentSnapshot != null){
                     nomeUsuario.setText(documentSnapshot.getString("nome"));
                     emailUsuario.setText(email);
+                    cidadeUsuario.setText(documentSnapshot.getString("cidade"));
                 }
             }
         });
@@ -124,6 +127,7 @@ public class TelaConta extends AppCompatActivity {
         imageUser = findViewById(R.id.imageUser);
         nomeUsuario = findViewById(R.id.textNomeUsuario);
         emailUsuario = findViewById(R.id.textEmailUsuario);
+        cidadeUsuario = findViewById(R.id.textCepUsuario);
 
     }
 
